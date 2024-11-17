@@ -1,0 +1,17 @@
+# age_parameter should be an integer
+age_parameter: 128
+
+# sex_parameter should be an integer
+sex_parameter: 370
+
+# bmi_parameter should be an integer
+bmi_parameter: 425
+
+# market_parameter should be an integer
+market_parameter: 250
+
+# smoker_parameter should be an integer
+smoker_parameter: 12500
+
+# num_kids_parameter should be an integer
+num_kids_parameter: 24000
