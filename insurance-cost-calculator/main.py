@@ -1,4 +1,6 @@
 import yaml
+import argparse
+
 
 class InsuranceCalculator:
     def __init__(self, name, age, sex, bmi, num_of_kids, smoker, market_parameter, age_parameter, sex_parameter,
@@ -46,7 +48,7 @@ def get_user_input():
     return name, age, sex, bmi, num_of_kids, smoker
 
 
-def main():
+def main(name, age, sex, bmi, num_of_kids, smoker):
     with open("config.yml") as file:
         config = yaml.safe_load(file)
     age_parameter = config['age_parameter']
@@ -57,12 +59,23 @@ def main():
     num_kids_parameter = config['num_kids_parameter']
     # market_parameter,age_parameter,sex_parameter,bmi_parameter,num_kids_parameter,smoker_parameter = mathematical_parameters()
     print("Welcome to the Insurance Cost Calculator!")
-    name, age, sex, bmi, num_of_kids, smoker = get_user_input()
+    # name, age, sex, bmi, num_of_kids, smoker = get_user_input()
     my_insurance_cal = InsuranceCalculator(name, age, sex, bmi, num_of_kids, smoker, market_parameter, age_parameter,
                                            sex_parameter,
                                            bmi_parameter, num_kids_parameter, smoker_parameter)
     my_insurance_cal.calculate_insurance_cost()
     print(my_insurance_cal)
 
+
 if __name__ == "__main__":
-     main()
+    parser = argparse.ArgumentParser(
+        prog='Insurance Cost Calculator',
+        description='Calculate the insurance cost of an insurance model')
+    parser.add_argument('-n', '--name', required=True)  # option that takes a value
+    parser.add_argument('-a', '--age', type=int,  required=True)  # option that takes a value
+    parser.add_argument('-s', '--sex', type=int, required=True)  # option that takes a value
+    parser.add_argument('-b', '--bmi', type=float,  required=True)  # option that takes a value
+    parser.add_argument('-nk', '--num_of_kids', type=int, required=True)
+    parser.add_argument('-sm', '--smoker', type=int,  required=True)
+    args = parser.parse_args()
+    main(args.name, args.age, args.sex, args.bmi, args.num_of_kids, args.smoker)
